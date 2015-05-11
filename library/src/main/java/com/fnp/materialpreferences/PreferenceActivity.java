@@ -9,7 +9,7 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity{
 
     public abstract String getToolbarName();
 
-    @TargetApi(21)
+    @TargetApi(11)
     public void loadFragment(PreferenceFragment preferenceFragment){
         getFragmentManager().beginTransaction()
                 .replace(R.id.content, preferenceFragment)
