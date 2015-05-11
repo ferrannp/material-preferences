@@ -19,14 +19,16 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
         super.onCreate(savedInstanceState);
         
         /**
-         * Optional, we load a PreferenceFragment which is the recommended why by Android 
+         * Optional, we load a PreferenceFragment which is 
+         * the recommended way by Android 
          * see @http://developer.android.com/guide/topics/ui/settings.html#Fragment
          * @TargetApi(11)
          */
         loadFragment(new MyPreferenceFragment());
     }
 
-    public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment 
+    public static class MyPreferenceFragment 
+        extends com.fnp.materialpreferences.PreferenceFragment 
     {
         @Override
         public int addPreferencesFromResource() {
