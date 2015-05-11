@@ -7,40 +7,48 @@ Uploading...
 
 ## Usage
 ### SettingsActivity
-    public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActivity {
-        @Override
-        public String getToolbarName() {
-            return getString(R.string.settings);
-        }
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            loadFragment(new MyPreferenceFragment());
-        }
-
-        public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment {
-
-            @Override
-            public int addPreferencesFromResource() {
-                return R.xml.preferences;
-            }
-        }
+```java
+public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActivity {
+    @Override
+    public String getToolbarName() {
+        return getString(R.string.settings);
     }
 
-### XML
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        /**
+         * Optional, we load a PreferenceFragment which is the recommended why by Android 
+         * see @http://developer.android.com/guide/topics/ui/settings.html#Fragment
+         * @TargetApi(11)
+         */
+        loadFragment(new MyPreferenceFragment());
+    }
 
-    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-        <com.fnp.materialpreferences.PreferenceCategory
-            <!-- Any value from PreferenceCategory --> >
-            <com.fnp.materialpreferences.CheckBoxPreference
-                <!-- Any value from CheckBoxPreference --> />
-            </com.fnp.materialpreferences.PreferenceCategory>
-    </PreferenceScreen>
+    public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment 
+    {
+        @Override
+        public int addPreferencesFromResource() {
+            return R.xml.preferences;
+        }
+    }
+}
+```
+
+### XML
+```xml
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.fnp.materialpreferences.PreferenceCategory
+        <!-- Any value from PreferenceCategory --> >
+        <com.fnp.materialpreferences.CheckBoxPreference
+            <!-- Any value from CheckBoxPreference --> />
+        </com.fnp.materialpreferences.PreferenceCategory>
+</PreferenceScreen>
+```
 
 ### Result
-![Screenshots](/assets/result-1.png)
+<img src=assets/result-1.png width=500 height=845 />
 
 ## TODO
 - ~~Add toolbar to PreferenceActivity with optional title~~
