@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.fnp.materialpreferences.PreferenceCategory android:title="@string/pref_header_general">
+        <com.fnp.materialpreferences.CheckBoxPreference
+            android:defaultValue="true"
+            android:key="example_checkbox"
+            android:summary="@string/pref_description_social_recommendations"
+            android:title="@string/pref_title_social_recommendations" />
+    </com.fnp.materialpreferences.PreferenceCategory>
+</PreferenceScreen>
