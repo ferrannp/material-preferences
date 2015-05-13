@@ -5,11 +5,6 @@ import android.os.Bundle;
 public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActivity {
 
     @Override
-    public String getToolbarName() {
-        return getString(R.string.settings);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

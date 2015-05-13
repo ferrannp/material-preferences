@@ -8,8 +8,6 @@ import android.view.MenuItem;
 
 public abstract class PreferenceActivity extends AppCompatPreferenceActivity {
 
-    public abstract String getToolbarName();
-
     @TargetApi(11)
     public void loadFragment(PreferenceFragment preferenceFragment) {
         getFragmentManager().beginTransaction()
@@ -24,7 +22,6 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity {
         setContentView(R.layout.activity_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        toolbar.setTitle(getToolbarName());
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
