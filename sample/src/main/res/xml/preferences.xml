@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="first_level" android:title="Settings">
 
     <com.fnp.materialpreferences.PreferenceCategory android:title="@string/pref_header_general">
         <com.fnp.materialpreferences.CheckBoxPreference
@@ -8,4 +9,50 @@
             android:summary="@string/pref_description_social_recommendations"
             android:title="@string/pref_title_social_recommendations" />
     </com.fnp.materialpreferences.PreferenceCategory>
+
+    <PreferenceScreen
+        android:title="Second level" android:key="another_screen">
+        <com.fnp.materialpreferences.PreferenceCategory android:title="Another sreen">
+            <com.fnp.materialpreferences.CheckBoxPreference
+                android:defaultValue="true"
+                android:key="second_example"
+                android:summary="I am a summary in a checkbox... ... Max 10 lines of summary, no jeje?"
+                android:title="Seems that this works" />
+        </com.fnp.materialpreferences.PreferenceCategory>
+
+        <PreferenceScreen
+            android:title="Third level" android:key="third_level_screen">
+            <com.fnp.materialpreferences.PreferenceCategory android:title="Test">
+                <com.fnp.materialpreferences.CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="third_example"
+                    android:summary="I am a summary in a checkbox... ... Max 10 lines of summary, no jeje?"
+                    android:title="Seems that this works" />
+            </com.fnp.materialpreferences.PreferenceCategory>
+
+            <PreferenceScreen
+                android:title="Fourth level" android:key="fourth_level_screen">
+                <com.fnp.materialpreferences.PreferenceCategory android:title="Test">
+                    <com.fnp.materialpreferences.CheckBoxPreference
+                        android:defaultValue="true"
+                        android:key="fourth_example"
+                        android:summary="I am a summary in a checkbox... ... Max 10 lines of summary, no jeje?"
+                        android:title="Seems that this works" />
+                </com.fnp.materialpreferences.PreferenceCategory>
+            </PreferenceScreen>
+        </PreferenceScreen>
+
+
+        <PreferenceScreen
+            android:title="Third level 2" android:key="third_level_screen_2">
+            <com.fnp.materialpreferences.PreferenceCategory android:title="Test">
+                <com.fnp.materialpreferences.CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="third_example_2"
+                    android:summary="I am a summary in a checkbox... ... Max 10 lines of summary, no jeje?"
+                    android:title="Seems that this works" />
+            </com.fnp.materialpreferences.PreferenceCategory>
+        </PreferenceScreen>
+
+    </PreferenceScreen>
 </PreferenceScreen>

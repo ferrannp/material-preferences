@@ -13,14 +13,20 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loadFragment(new GeneralPreferenceFragment());
+        loadFragment(new MyPreferenceFragment());
     }
 
-    public static class GeneralPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment {
-
+    public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment
+    {
         @Override
         public int addPreferencesFromResource() {
             return R.xml.preferences;
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState){
+            super.onActivityCreated(savedInstanceState);
+            //Write here your findPreference listeners if you want any
         }
     }
 }
