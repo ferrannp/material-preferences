@@ -33,7 +33,9 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
 
 ### XML
 ```xml
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings" android:key="settings">
+    <!-- title will be used in the Toolbar -->
     <com.fnp.materialpreferences.PreferenceCategory
         <!-- Any value from PreferenceCategory --> >
         <com.fnp.materialpreferences.CheckBoxPreference
