@@ -3,17 +3,16 @@ package com.fnp.materialpreferences;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceGroup;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
-import java.util.ArrayList;
 
 @TargetApi(11)
 public abstract class PreferenceFragment extends android.preference.PreferenceFragment {
@@ -47,22 +46,43 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
             ListView lv = (ListView) v.findViewById(android.R.id.list);
             lv.setPadding(0, 0, 0, 0);
 
-            ArrayList<Preference> preferenceList = getPreferenceScreens(getPreferenceScreen(),
-                    new ArrayList<Preference>());
-            for (Preference preference : preferenceList) {
+            for (int i = 0; i < mPreferenceScreen.getPreferenceCount(); i++) {
+                Preference preference = mPreferenceScreen.getPreference(i);
+
                 if (preference instanceof PreferenceScreen) {
-                    //PreferenceScreen can't be extended so we change the layout here
-                    if(preference.getLayoutResource() != R.layout.preference_material) {
-                        preference.setLayoutResource(R.layout.preference_material);
-                    }
                     preference.setOnPreferenceClickListener(
                             new Preference.OnPreferenceClickListener() {
-                        @Override
-                        public boolean onPreferenceClick(Preference preference) {
-                            onPreferenceTreeClick(null, preference);
-                            return true;
+                                @Override
+                                public boolean onPreferenceClick(Preference preference) {
+                                    onPreferenceTreeClick(null, preference);
+                                    return true;
+                                }
+                            });
+                }
+
+                //Apply custom layouts on pre-Lollipop
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    if (preference instanceof PreferenceScreen && preference.getLayoutResource()
+                            != R.layout.preference_material) {
+                        preference.setLayoutResource(R.layout.preference_material);
+                    } else if (preference instanceof PreferenceCategory &&
+                            preference.getLayoutResource() != R.layout.preference_category) {
+                        preference.setLayoutResource(R.layout.preference_category);
+
+                        PreferenceCategory category
+                                = (PreferenceCategory) preference;
+                        for (int j = 0; j < category.getPreferenceCount(); j++) {
+                            Preference basicPreference = category.getPreference(j);
+                            if (!(basicPreference instanceof PreferenceCategory
+                                    || basicPreference instanceof PreferenceScreen)) {
+                                if (basicPreference.getLayoutResource()
+                                        != R.layout.preference_material_widget) {
+                                    basicPreference
+                                            .setLayoutResource(R.layout.preference_material_widget);
+                                }
+                            }
                         }
-                    });
+                    }
                 }
             }
         }
@@ -76,21 +96,6 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
         ((PreferenceActivity) getActivity()).getSupportActionBar()
                 .setTitle(getPreferenceScreen().getTitle());
     }
-
-    private ArrayList<Preference> getPreferenceScreens(Preference p, ArrayList<Preference> list) {
-        if (p instanceof PreferenceCategory || p instanceof PreferenceScreen) {
-            PreferenceGroup pGroup = (PreferenceGroup) p;
-            if (p instanceof PreferenceScreen) {
-                list.add(p);
-            }
-            int pCount = pGroup.getPreferenceCount();
-            for (int i = 0; i < pCount; i++) {
-                getPreferenceScreens(pGroup.getPreference(i), list);
-            }
-        }
-        return list;
-    }
-
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
@@ -108,7 +113,11 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
             fragment.setPreferenceScreen(((PreferenceScreen) preference));
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.content, fragment);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                transaction.replace(R.id.content, fragment);
+            }else{
+                transaction.replace(android.R.id.content, fragment);
+            }
             //transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.addToBackStack(":android:prefs");
             transaction.commitAllowingStateLoss();

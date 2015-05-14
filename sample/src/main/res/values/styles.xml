@@ -1,5 +1,5 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Main theme colors -->
         <!--   your app branding color for the app bar -->
         <item name="colorPrimary">#37474F</item>
@@ -8,11 +8,13 @@
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">#009688</item>
 
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-
         <!-- With this, the CAB overlays the toolbar -->
         <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
 </resources>

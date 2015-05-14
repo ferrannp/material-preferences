@@ -1,6 +1,7 @@
 package com.fnp.materialpreferences;
 
 import android.annotation.TargetApi;
+import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,19 +11,27 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity {
 
     @TargetApi(11)
     public void loadFragment(PreferenceFragment preferenceFragment) {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.content, preferenceFragment)
-                .commit();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            fragmentTransaction.replace(R.id.content, preferenceFragment);
+        }else{
+            fragmentTransaction.replace(android.R.id.content, preferenceFragment);
+        }
+        fragmentTransaction.commit();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_settings);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Do not add custom layout for lollipop devices or we lose the widgets animation
+        // (app compat bug?)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            setContentView(R.layout.activity_settings);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+        }
 
-        setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
