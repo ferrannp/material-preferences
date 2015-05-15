@@ -9,7 +9,6 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +30,6 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
     }
 
     @Override
-    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
-        super.setPreferenceScreen(preferenceScreen);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (addPreferencesFromResource() != -1) {
@@ -44,7 +38,6 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
         if (savedInstanceState != null) {
             if (getPreferenceScreen() != null) {
-                Log.d("aaa", "aaa");
                 for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
                     Preference preference = getPreferenceScreen().getPreference(i);
                     if (preference instanceof PreferenceScreen) {
@@ -55,7 +48,8 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
             } else {
                 PreferenceScreen preferenceScreen = preferenceScreenHashMap
-                        .get(savedInstanceState.getString("myFragmentTag"));
+                        .get(savedInstanceState
+                                .getString("com.fnp.materialpreferences.nestedFragment"));
                 if (preferenceScreen != null) {
                     this.setPreferenceScreen(preferenceScreen);
                     for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
@@ -73,7 +67,8 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
-        savedInstanceState.putString("myFragmentTag", getPreferenceScreen().getKey());
+        savedInstanceState.putString("com.fnp.materialpreferences.nestedFragment",
+                getPreferenceScreen().getKey());
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -96,7 +91,7 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
                             new Preference.OnPreferenceClickListener() {
                                 @Override
                                 public boolean onPreferenceClick(Preference preference) {
-                                    onPreferenceScreenClick(preference);
+                                    onPreferenceScreenClick((PreferenceScreen)preference);
                                     return true;
                                 }
                             });
@@ -143,39 +138,35 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //Title of each fragment would be specify in android:title of the preference xml file
+        //Title of each fragment would be specified in android:title of the preference xml file
         ((PreferenceActivity) getActivity()).getSupportActionBar()
                 .setTitle(getPreferenceScreen().getTitle());
     }
 
-    public boolean onPreferenceScreenClick(@NonNull Preference preference) {
+    public boolean onPreferenceScreenClick(@NonNull PreferenceScreen preference) {
 
-        // If the user has clicked on a preference screen, set up the action bar
-        if (preference instanceof PreferenceScreen) {
-            final Dialog dialog = ((PreferenceScreen) preference).getDialog();
+        final Dialog dialog = preference.getDialog();
 
-            //Close the default view without toolbar and create our own Fragment version
-            dialog.dismiss();
+        //Close the default view without toolbar and create our own Fragment version
+        dialog.dismiss();
 
-            NestedPreferenceFragment fragment = new NestedPreferenceFragment();
+        NestedPreferenceFragment fragment = new NestedPreferenceFragment();
 
-            //Save the preference screen so it can bet set when the transaction is done
-            fragment.savePreferenceScreen(((PreferenceScreen) preference));
+        //Save the preference screen so it can bet set when the transaction is done
+        fragment.savePreferenceScreen(preference);
 
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                transaction.replace(R.id.content, fragment);
-            } else {
-                transaction.replace(android.R.id.content, fragment);
-            }
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.addToBackStack(preference.getKey());
-            transaction.commitAllowingStateLoss();
-
-            return true;
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            transaction.replace(R.id.content, fragment);
+        } else {
+            transaction.replace(android.R.id.content, fragment);
         }
 
-        return false;
-    }
+        //TODO make animation optional (or give methods to animate it)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.addToBackStack(preference.getKey());
+        transaction.commitAllowingStateLoss();
 
+        return true;
+    }
 }

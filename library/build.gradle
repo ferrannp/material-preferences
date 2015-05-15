@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'bintray-release'
 
 android {
     compileSdkVersion 22
@@ -20,4 +21,16 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
+}
+
+publish {
+    userOrg = 'ferrannp'
+    groupId = 'com.fnp'
+    artifactId = 'material-preferences'
+    version = '0.0.1'
+    description = 'Makes easier to create a preference screen on pre-Lollipop Android devices ' +
+            'looking exactly as if it was a Lollipop one.'
+    website = 'https://github.com/ferrannp/material-preferences'
+    issueTracker = "${website}/issues"
+    repository = "${website}.git"
 }
