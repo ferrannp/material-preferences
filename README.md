@@ -5,6 +5,11 @@ Making straightforward to create a preference screen on pre-Lollipop devices loo
 
 Uploading...
 
+## Features
+- Material look (title, summary, widgets...) on pre-Lollipop
+- Nested PreferenceScreen with Toolbar and handling configuration change correctly (restore state)
+- No API change
+
 ## Usage
 ### SettingsActivity
 ```java
