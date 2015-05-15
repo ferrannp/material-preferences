@@ -8,7 +8,9 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loadFragment(new MyPreferenceFragment());
+        if(savedInstanceState == null) { //TODO do this in the library
+            loadFragment(new MyPreferenceFragment());
+        }
     }
 
     public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment

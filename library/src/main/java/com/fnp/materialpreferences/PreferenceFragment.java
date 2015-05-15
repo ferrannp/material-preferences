@@ -9,23 +9,31 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import java.util.HashMap;
 
 @TargetApi(11)
 public abstract class PreferenceFragment extends android.preference.PreferenceFragment {
 
     public abstract int addPreferencesFromResource();
 
+    public static HashMap<String, PreferenceScreen> preferenceScreenHashMap = new HashMap<>();
+
     private PreferenceScreen mPreferenceScreen;
 
-    @Override
-    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+    public void savePreferenceScreen(PreferenceScreen preferenceScreen) {
         mPreferenceScreen = preferenceScreen;
     }
 
+    @Override
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        super.setPreferenceScreen(preferenceScreen);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,40 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
         if (addPreferencesFromResource() != -1) {
             addPreferencesFromResource(addPreferencesFromResource());
         }
+
+        if (savedInstanceState != null) {
+            if (getPreferenceScreen() != null) {
+                Log.d("aaa", "aaa");
+                for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+                    Preference preference = getPreferenceScreen().getPreference(i);
+                    if (preference instanceof PreferenceScreen) {
+                        preferenceScreenHashMap.put(preference.getKey(),
+                                (PreferenceScreen) preference);
+                    }
+                }
+
+            } else {
+                PreferenceScreen preferenceScreen = preferenceScreenHashMap
+                        .get(savedInstanceState.getString("myFragmentTag"));
+                if (preferenceScreen != null) {
+                    this.setPreferenceScreen(preferenceScreen);
+                    for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+                        Preference preference = getPreferenceScreen().getPreference(i);
+
+                        if (preference instanceof PreferenceScreen) {
+                            preferenceScreenHashMap.put(preference.getKey(),
+                                    (PreferenceScreen) preference);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+        savedInstanceState.putString("myFragmentTag", getPreferenceScreen().getKey());
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -40,21 +82,21 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
                              Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
         if (v != null) {
-            if (mPreferenceScreen != null) {
+            if (mPreferenceScreen != null && getPreferenceScreen() == null) {
                 super.setPreferenceScreen(mPreferenceScreen);
             }
             ListView lv = (ListView) v.findViewById(android.R.id.list);
             lv.setPadding(0, 0, 0, 0);
 
-            for (int i = 0; i < mPreferenceScreen.getPreferenceCount(); i++) {
-                Preference preference = mPreferenceScreen.getPreference(i);
+            for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+                Preference preference = getPreferenceScreen().getPreference(i);
 
                 if (preference instanceof PreferenceScreen) {
                     preference.setOnPreferenceClickListener(
                             new Preference.OnPreferenceClickListener() {
                                 @Override
                                 public boolean onPreferenceClick(Preference preference) {
-                                    onPreferenceTreeClick(null, preference);
+                                    onPreferenceScreenClick(preference);
                                     return true;
                                 }
                             });
@@ -90,16 +132,23 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (preferenceScreenHashMap.size() > 0) {
+            preferenceScreenHashMap.clear();
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //TODO crash on configuration change
+
+        //Title of each fragment would be specify in android:title of the preference xml file
         ((PreferenceActivity) getActivity()).getSupportActionBar()
                 .setTitle(getPreferenceScreen().getTitle());
     }
 
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-                                         @NonNull Preference preference) {
+    public boolean onPreferenceScreenClick(@NonNull Preference preference) {
 
         // If the user has clicked on a preference screen, set up the action bar
         if (preference instanceof PreferenceScreen) {
@@ -110,16 +159,17 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
             NestedPreferenceFragment fragment = new NestedPreferenceFragment();
 
-            fragment.setPreferenceScreen(((PreferenceScreen) preference));
+            //Save the preference screen so it can bet set when the transaction is done
+            fragment.savePreferenceScreen(((PreferenceScreen) preference));
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 transaction.replace(R.id.content, fragment);
-            }else{
+            } else {
                 transaction.replace(android.R.id.content, fragment);
             }
-            //transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.addToBackStack(":android:prefs");
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.addToBackStack(preference.getKey());
             transaction.commitAllowingStateLoss();
 
             return true;
