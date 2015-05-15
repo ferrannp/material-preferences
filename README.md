@@ -36,11 +36,11 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings" android:key="settings">
     <!-- title will be used in the Toolbar -->
-    <com.fnp.materialpreferences.PreferenceCategory
+    <PreferenceCategory
         <!-- Any value from PreferenceCategory --> >
-        <com.fnp.materialpreferences.CheckBoxPreference
+        <CheckBoxPreference
             <!-- Any value from CheckBoxPreference --> />
-        </com.fnp.materialpreferences.PreferenceCategory>
+        </PreferenceCategory>
 </PreferenceScreen>
 ```
 
