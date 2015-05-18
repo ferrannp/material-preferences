@@ -9,13 +9,22 @@ import android.view.MenuItem;
 
 public abstract class PreferenceActivity extends AppCompatPreferenceActivity {
 
-    @TargetApi(11)
-    public void loadFragment(PreferenceFragment preferenceFragment) {
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void setPreferenceFragment(PreferenceFragment preferenceFragment) {
+
+        //First check if it's already loaded (configuration change) so we don't overlap fragments
+        if(getFragmentManager()
+                .findFragmentByTag("com.fnp.materialpreferences.MainFragment") != null){
+            return;
+        }
+
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            fragmentTransaction.replace(R.id.content, preferenceFragment);
+            fragmentTransaction.replace(R.id.content, preferenceFragment,
+                    "com.fnp.materialpreferences.MainFragment");
         }else{
-            fragmentTransaction.replace(android.R.id.content, preferenceFragment);
+            fragmentTransaction.replace(android.R.id.content, preferenceFragment,
+                    "com.fnp.materialpreferences.MainFragment");
         }
         fragmentTransaction.commit();
     }

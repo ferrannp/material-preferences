@@ -8,9 +8,7 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(savedInstanceState == null) { //TODO do this in the library
-            loadFragment(new MyPreferenceFragment());
-        }
+        setPreferenceFragment(new MyPreferenceFragment());
     }
 
     public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment
@@ -21,7 +19,7 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
         }
 
         @Override
-        public void onActivityCreated(Bundle savedInstanceState){
+        public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             //Write here your findPreference listeners if you want any
         }

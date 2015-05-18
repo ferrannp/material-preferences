@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="first_level" android:title="Settings">
+    android:key="first_level"
+    android:title="@string/settings">
 
-    <PreferenceCategory android:title="@string/pref_header_general">
+    <PreferenceCategory android:title="Safe world">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="example_checkbox"
-            android:summary="@string/pref_description_social_recommendations"
-            android:title="@string/pref_title_social_recommendations" />
+            android:summary="Worth trying..."
+            android:title="I want chocolate" />
     </PreferenceCategory>
 
     <PreferenceScreen
-        android:title="Second level" android:key="another_screen">
-        <PreferenceCategory android:title="Another sreen">
+        android:key="second_level_screen"
+        android:title="Second level">
+        <PreferenceCategory android:title="Switch preference">
             <SwitchPreference
                 android:defaultValue="true"
                 android:key="second_example"
-                android:summary="I am a summary in a checkbox... Max 10 lines of summary, no jeje?"
-                android:title="Seems that this works" />
+                android:summary="This switch needs some work on pre-Lollipop."
+                android:title="Destroy the galaxy" />
         </PreferenceCategory>
 
         <PreferenceScreen
-            android:title="Third level" android:key="third_level_screen">
-            <PreferenceCategory android:title="Test">
-                <CheckBoxPreference
-                    android:defaultValue="true"
-                    android:key="third_example"
-                    android:summary="I am a summary in a checkbox... Max 10 lines of summary, no jeje?"
-                    android:title="Seems that this works" />
+            android:key="third_level_screen"
+            android:title="Third level">
+            <PreferenceCategory android:title="Dark forces">
+                <PreferenceScreen
+                    android:key="fourth_level_screen"
+                    android:title="Fourth level">
+                    <PreferenceCategory android:title="Test">
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="fourth_example"
+                            android:summary="Write something useful here."
+                            android:title="Really, be careful!" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
             </PreferenceCategory>
-
-            <PreferenceScreen
-                android:title="Fourth level" android:key="fourth_level_screen">
-                <PreferenceCategory android:title="Test">
-                    <CheckBoxPreference
-                        android:defaultValue="true"
-                        android:key="fourth_example"
-                        android:summary="I am a summary in a checkbox... Max 10 lines of summary, no jeje?"
-                        android:title="Seems that this works" />
-                </PreferenceCategory>
-            </PreferenceScreen>
         </PreferenceScreen>
 
 
         <PreferenceScreen
-            android:title="Third level 2" android:key="third_level_screen_2">
-            <PreferenceCategory android:title="Test">
+            android:key="third_level_screen_2"
+            android:title="Third level 2">
+            <PreferenceCategory android:title="Where am I?">
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:key="third_example_2"
-                    android:summary="I am a summary in a checkbox... Max 10 lines of summary, no jeje?"
-                    android:title="Seems that this works" />
+                    android:title="Are you lost?"
+                    android:summary="Go back!"/>
             </PreferenceCategory>
         </PreferenceScreen>
+    </PreferenceScreen>
 
+    <PreferenceScreen
+        android:summary="Click to open the about activity"
+        android:title="About"
+        android:key="another_activity">
+        <intent android:action="android.intent.action.ABOUT_ACTIVITY"/>
     </PreferenceScreen>
 </PreferenceScreen>
