@@ -57,7 +57,7 @@ Check the [resources](library/src/main/res) folder, if you use in your project a
 More info: https://developer.android.com/tools/projects/index.html#considerations @see "Resource conflicts"
 
 ## TODO
-- ~~Add toolbar to all PreferenceFragment (including nested screens) ~~
+- ~~Add toolbar to all PreferenceFragment (including nested screens)~~
 - ~~Proper tint based on accent color~~
 - ~~Show title and summary of the preferences in Material format~~
 - ~~Proper paddings and margins~~
