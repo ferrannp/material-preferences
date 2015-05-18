@@ -52,7 +52,9 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
 <img src=assets/result-1.png width=500 height=845 />
 
 ### Beware: Do not override library resources intentionless
-Check the [resources](library/src/main/res) folder, if you use in your project a resource with the same name as this library, for example, "md_preference_material.xml", your resource will have preference and that might cause the library to fail if you are not doing this intentionally. 
+Check the [resources](library/src/main/res) folder, if you use in your project a resource with the same name as this library, for example, "md_preference_material.xml", your resource will have preference and that might cause the library to fail if you are not doing this intentionally.
+
+More info: https://developer.android.com/tools/projects/index.html#considerations @see "Resource conflicts"
 
 ## TODO
 - ~~Add toolbar to all PreferenceFragment (including nested screens) ~~
