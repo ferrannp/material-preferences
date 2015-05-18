@@ -19,12 +19,11 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
         super.onCreate(savedInstanceState);
         
         /**
-         * Optional, we load a PreferenceFragment which is 
-         * the recommended way by Android 
+         * We load a PreferenceFragment which is the recommended way by Android 
          * see @http://developer.android.com/guide/topics/ui/settings.html#Fragment
          * @TargetApi(11)
          */
-        loadFragment(new MyPreferenceFragment());
+        setPreferenceFragment(new MyPreferenceFragment());
     }
 
     public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment {
@@ -53,7 +52,7 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
 <img src=assets/result-1.png width=500 height=845 />
 
 ## TODO
-- ~~Add toolbar to PreferenceActivity with optional title~~
+- ~~Add toolbar to all PreferenceFragment (including nested screens) ~~
 - ~~Proper tint based on accent color~~
 - ~~Show title and summary of the preferences in Material format~~
 - ~~Proper paddings and margins~~
