@@ -123,11 +123,11 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
         //Apply custom layouts on pre-Lollipop
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             if (preference instanceof PreferenceScreen && preference.getLayoutResource()
-                    != R.layout.preference_material) {
-                preference.setLayoutResource(R.layout.preference_material);
+                    != R.layout.mp_preference_material) {
+                preference.setLayoutResource(R.layout.mp_preference_material);
             } else if (preference instanceof PreferenceCategory &&
-                    preference.getLayoutResource() != R.layout.preference_category) {
-                preference.setLayoutResource(R.layout.preference_category);
+                    preference.getLayoutResource() != R.layout.mp_preference_category) {
+                preference.setLayoutResource(R.layout.mp_preference_category);
 
                 PreferenceCategory category
                         = (PreferenceCategory) preference;
@@ -136,9 +136,9 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
                     if (!(basicPreference instanceof PreferenceCategory
                             || basicPreference instanceof PreferenceScreen)) {
                         if (basicPreference.getLayoutResource()
-                                != R.layout.preference_material_widget) {
+                                != R.layout.mp_preference_material_widget) {
                             basicPreference
-                                    .setLayoutResource(R.layout.preference_material_widget);
+                                    .setLayoutResource(R.layout.mp_preference_material_widget);
                         }
                     }
                 }
@@ -168,7 +168,7 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
 
         final Dialog dialog = preference.getDialog();
         if (dialog != null) { //It might be null if PreferenceScreen contains an intent
-            //Close the default view without toolbar and create our own Fragment version
+            //Close the default view without mp_toolbar and create our own Fragment version
             dialog.dismiss();
 
             NestedPreferenceFragment fragment = new NestedPreferenceFragment();

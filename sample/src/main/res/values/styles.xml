@@ -8,7 +8,7 @@
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">#009688</item>
 
-        <!-- With this, the CAB overlays the toolbar -->
+        <!-- With this, the CAB overlays the mp_toolbar -->
         <item name="windowActionModeOverlay">true</item>
     </style>
 

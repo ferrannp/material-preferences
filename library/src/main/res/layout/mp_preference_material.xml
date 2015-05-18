@@ -10,14 +10,5 @@
     android:paddingRight="?attr/listPreferredItemPaddingRight"
     android:baselineAligned="false">
 
-    <include layout="@layout/preference_material_body" />
-
-    <!-- Preference should place its actual preference widget here. -->
-    <LinearLayout
-        android:id="@android:id/widget_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical" />
-
+    <include layout="@layout/mp_preference_material_body" />
 </LinearLayout>

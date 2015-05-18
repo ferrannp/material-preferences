@@ -36,7 +36,7 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity {
         // Do not add custom layout for lollipop devices or we lose the widgets animation
         // (app compat bug?)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            setContentView(R.layout.activity_settings);
+            setContentView(R.layout.mp_activity_settings);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
         }

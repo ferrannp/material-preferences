@@ -5,14 +5,14 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/mp_toolbar"/>
 
     <View
         android:id="@+id/toolbar_shadow"
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_below="@id/toolbar"
-        android:background="@drawable/toolbar_shadow" />
+        android:background="@drawable/mp_toolbar_shadow" />
 
     <FrameLayout
         android:id="@+id/content"
