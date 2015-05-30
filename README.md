@@ -8,7 +8,7 @@ Making straightforward to create a preference screen on pre-Lollipop devices loo
 ## Features
 - Material look (title, summary, widgets...) on pre-Lollipop
 - Nested PreferenceScreen with Toolbar and handling configuration change correctly (restore state)
-- No API change (trick for [SwitchPreference](README.md#switchpreference))
+- No API change (only trick for [SwitchPreference](README.md#switchpreference))
 
 ## Usage
 ### SettingsActivity
