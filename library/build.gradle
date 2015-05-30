@@ -9,7 +9,7 @@ android {
         minSdkVersion 7
         targetSdkVersion 22
         versionCode 1
-        versionName "0.1.2"
+        versionName "0.1.3"
     }
     buildTypes {
         release {
@@ -27,7 +27,7 @@ publish {
     userOrg = 'ferrannp'
     groupId = 'com.fnp'
     artifactId = 'material-preferences'
-    version = '0.1.2'
+    version = '0.1.3'
     description = 'Makes easier to create a preference screen on pre-Lollipop Android devices ' +
             'looking exactly as if it was a Lollipop one.'
     website = 'https://github.com/ferrannp/material-preferences'

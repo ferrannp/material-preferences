@@ -15,7 +15,8 @@
         android:key="second_level_screen"
         android:title="Second level">
         <PreferenceCategory android:title="Switch preference">
-            <SwitchPreference
+            <CheckBoxPreference
+                android:widgetLayout="@layout/mp_preference_switch"
                 android:defaultValue="true"
                 android:key="second_example"
                 android:summary="This switch needs some work on pre-Lollipop."
