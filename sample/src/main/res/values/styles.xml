@@ -15,6 +15,8 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="android:foreground">?android:windowContentOverlay</item>
+        <item name="android:windowContentOverlay">@drawable/bottom_shadow</item>
     </style>
 
 </resources>
