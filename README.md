@@ -3,12 +3,12 @@ Making straightforward to create a preference screen on pre-Lollipop devices loo
 
 ## Install (Gradle dependency)
 
-Uploading...
+    compile 'com.fnp:material-preferences:0.1.3'
 
 ## Features
 - Material look (title, summary, widgets...) on pre-Lollipop
 - Nested PreferenceScreen with Toolbar and handling configuration change correctly (restore state)
-- No API change
+- No API change (only trick for [SwitchPreference](README.md#switchpreference))
 
 ## Usage
 ### SettingsActivity
@@ -46,6 +46,17 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
             <!-- Any value from CheckBoxPreference --> />
         </PreferenceCategory>
 </PreferenceScreen>
+```
+
+### SwitchPreference
+There is a trick for ```SwitchPreference```, instead, use a ```CheckBoxPreference``` and use the ```mp_preference_layout```as a widget layout. For now, this is the only way to style it.
+
+```xml
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="some_key"
+        android:title="Hooray!"
+        android:widgetLayout="@layout/mp_preference_switch"/>
 ```
 
 ### Result
