@@ -2,12 +2,12 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="windowNoTitle">false</item>
         <item name="windowActionBar">true</item>
-        <item name="actionBarStyle">@style/MyActionBar</item>
+        <item name="actionBarStyle">@style/AppTheme.actionBarStyle</item>
     </style>
 
     <!-- To follow the guidelines
     @see http://www.google.com/design/spec/layout/structure.html#structure-toolbars -->
-    <style name="MyActionBar" parent="Widget.AppCompat.ActionBar">
+    <style name="AppTheme.actionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="background">?attr/colorPrimary</item>
         <item name="contentInsetStart">72dp</item>
         <item name="contentInsetLeft">72dp</item>

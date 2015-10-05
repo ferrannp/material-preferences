@@ -13,7 +13,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.about);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
+            setSupportActionBar((Toolbar)findViewById(R.id.mp_toolbar));
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

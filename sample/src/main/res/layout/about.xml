@@ -3,8 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/mp_toolbar"/>
+    <!-- Yes, I actually need a toolbar for pre-Lollipop and I can use the layout from the
+         library -->
+    <include layout="@layout/mp_toolbar"/>
 
 </LinearLayout>
