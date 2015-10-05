@@ -13,8 +13,8 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity {
     public void setPreferenceFragment(PreferenceFragment preferenceFragment) {
 
         //First check if it's already loaded (configuration change) so we don't overlap fragments
-        if(getFragmentManager()
-                .findFragmentByTag("com.fnp.materialpreferences.MainFragment") != null){
+        if (getFragmentManager()
+                .findFragmentByTag("com.fnp.materialpreferences.MainFragment") != null) {
             return;
         }
 
@@ -22,7 +22,7 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             fragmentTransaction.replace(R.id.content, preferenceFragment,
                     "com.fnp.materialpreferences.MainFragment");
-        }else{
+        } else {
             fragmentTransaction.replace(android.R.id.content, preferenceFragment,
                     "com.fnp.materialpreferences.MainFragment");
         }
@@ -36,7 +36,7 @@ public abstract class PreferenceActivity extends AppCompatPreferenceActivity {
         // Do not add custom layout for lollipop devices or we lose the widgets animation
         // (app compat bug?)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            setContentView(R.layout.mp_activity_settings);;
+            setContentView(R.layout.mp_activity_settings);
             Toolbar toolbar = (Toolbar) findViewById(R.id.mp_toolbar);
             setSupportActionBar(toolbar);
         }

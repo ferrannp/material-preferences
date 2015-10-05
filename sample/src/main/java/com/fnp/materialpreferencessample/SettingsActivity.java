@@ -11,8 +11,7 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
         setPreferenceFragment(new MyPreferenceFragment());
     }
 
-    public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment
-    {
+    public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment {
         @Override
         public int addPreferencesFromResource() {
             return R.xml.preferences;

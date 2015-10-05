@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:paddingRight="?attr/listPreferredItemPaddingRight"
-    android:baselineAligned="false">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:baselineAligned="false"
+              android:gravity="center_vertical"
+              android:minHeight="?android:attr/listPreferredItemHeight"
+              android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+              android:paddingLeft="?attr/listPreferredItemPaddingLeft"
+              android:paddingRight="?attr/listPreferredItemPaddingRight"
+              android:paddingStart="?android:attr/listPreferredItemPaddingStart">
 
-    <include layout="@layout/mp_preference_material_body" />
+    <include layout="@layout/mp_preference_material_body"/>
 
     <!-- Preference should place its actual preference widget here. -->
     <LinearLayout
@@ -18,6 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:orientation="vertical" />
+        android:orientation="vertical"/>
 
 </LinearLayout>
