@@ -12,7 +12,7 @@ Making straightforward to create a preference screen on pre-Lollipop devices loo
 
 ## Usage
 
-Please check the [sample project](tree/master/sample).
+Please check the [sample project](sample).
 
 ### SettingsActivity
 ```java
