@@ -66,9 +66,12 @@ There is a trick for ```SwitchPreference```, instead, use a ```CheckBoxPreferenc
 ```
 
 ### Result
-<img src=assets/result-1.png width=500 height=845 />
+<img src=assets/levels_example.png />
 
 ### Beware: Do not override library resources intentionless
 Check the [resources](library/src/main/res) folder, if you use in your project a resource with the same name as this library, for example, "md_preference_material.xml", your resource will have preference and that might cause the library to fail if you are not doing this intentionally.
 
 More info: https://developer.android.com/tools/projects/index.html#considerations @see "Resource conflicts"
+
+### Known apps using this library
+- <a href="https://play.google.com/store/apps/details?id=com.fnp.audioprofiles">Audio Profiles</a>
