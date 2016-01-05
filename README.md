@@ -3,14 +3,16 @@
 
 Making straightforward to create a preference screen on pre-Lollipop devices looking exactly as if it was a Lollipop one. API 7.
 
-## Install (Gradle dependency)
-
-    compile 'com.fnp:material-preferences:0.1.4'
+![GIF demo](http://i.giphy.com/13kB32ydxivZ3a.gif)
 
 ## Features
 - Material look (title, summary, widgets...) on pre-Lollipop devices
 - Nested PreferenceScreen with Toolbar and handling configuration change correctly (restore state)
 - No API change (only trick for [SwitchPreference](README.md#switchpreference))
+
+## Install (Gradle dependency)
+
+    compile 'com.fnp:material-preferences:0.1.4'
 
 ## Usage
 
@@ -93,7 +95,7 @@ There is a trick for ```SwitchPreference```, instead, use a ```CheckBoxPreferenc
 ```
 
 ## Result
-<img src=assets/levels_example.png />
+![Example](assets/levels_example.png)
 
 ## Beware: Do not override library resources intentionless
 Check the [resources](library/src/main/res) folder, if you use in your project a resource with the same name as this library, for example, "mp_preference_material.xml", your resource will have preference and that might cause the library to fail if you are not doing this intentionally.
@@ -101,4 +103,4 @@ Check the [resources](library/src/main/res) folder, if you use in your project a
 More info: https://developer.android.com/tools/projects/index.html#considerations (see "Resource conflicts")
 
 ## Known apps using this library
-- <a href="https://play.google.com/store/apps/details?id=com.fnp.audioprofiles">Audio Profiles</a>
+- [Audio Profiles](https://play.google.com/store/apps/details?id=com.fnp.audioprofiles)
