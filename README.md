@@ -14,7 +14,32 @@ Making straightforward to create a preference screen on pre-Lollipop devices loo
 
 ## Usage
 
-Please check the [sample project](sample).
+Please check the [sample project](sample) and the required steps below.
+
+###styles
+For pre-Lollipop devices you need to use a Theme with No Action Bar, add that in ```values/styles.xml```:
+```xml
+<style name="SettingsTheme" parent="AppBaseTheme">
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+</style>
+```
+
+On the other hand, for Lollipop or above, you need to use a theme that has an ActionBar, add that in ```values-v21/styles.xml```:
+```xml
+<style name="SettingsTheme" parent="AppBaseTheme">
+    <item name="windowNoTitle">false</item>
+    <item name="windowActionBar">true</item>
+    <item name="actionBarStyle">@style/AppTheme.actionBarStyle</item>
+</style>
+
+<!-- To follow the guidelines http://www.google.com/design/spec/layout/structure.html#structure-toolbars -->
+<style name="AppTheme.actionBarStyle" parent="Widget.AppCompat.ActionBar">
+    <item name="background">?attr/colorPrimary</item>
+    <item name="contentInsetStart">72dp</item>
+    <item name="contentInsetLeft">72dp</item>
+</style>
+```
 
 ### SettingsActivity
 ```java
@@ -34,14 +59,14 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
     public static class MyPreferenceFragment extends com.fnp.materialpreferences.PreferenceFragment {
         @Override
         public int addPreferencesFromResource() {
-            return R.xml.preferences;
+            return R.xml.preferences; // Your preference file
         }
     }
 }
 ```
 
-### XML
-*IMPORTANT*: Use always an ```android:key``` on your ```PreferenceScreen(s)```, if not, the library won't be able to restore the state when a configuration change happens (like device rotation).
+### PreferenceScreen XML
+**IMPORTANT**: Use always an ```android:key``` in your ```PreferenceScreen(s)```, if not, the library won't be able to restore the state when a configuration change happens (like device rotation).
 
 ```xml
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,7 +82,7 @@ public class SettingsActivity extends com.fnp.materialpreferences.PreferenceActi
 ```
 
 ### SwitchPreference
-There is a trick for ```SwitchPreference```, instead, use a ```CheckBoxPreference``` and use the ```mp_preference_layout```as a widget layout. For now, this is the only way to style it.
+There is a trick for ```SwitchPreference```, instead, use a ```CheckBoxPreference``` and use the ```@layout/mp_preference_switch``` as a widget layout. For now, this is the only way to style it.
 
 ```xml
 <CheckBoxPreference
@@ -67,13 +92,13 @@ There is a trick for ```SwitchPreference```, instead, use a ```CheckBoxPreferenc
     android:widgetLayout="@layout/mp_preference_switch"/>
 ```
 
-### Result
+## Result
 <img src=assets/levels_example.png />
 
-### Beware: Do not override library resources intentionless
-Check the [resources](library/src/main/res) folder, if you use in your project a resource with the same name as this library, for example, "md_preference_material.xml", your resource will have preference and that might cause the library to fail if you are not doing this intentionally.
+## Beware: Do not override library resources intentionless
+Check the [resources](library/src/main/res) folder, if you use in your project a resource with the same name as this library, for example, "mp_preference_material.xml", your resource will have preference and that might cause the library to fail if you are not doing this intentionally.
 
-More info: https://developer.android.com/tools/projects/index.html#considerations @see "Resource conflicts"
+More info: https://developer.android.com/tools/projects/index.html#considerations (see "Resource conflicts")
 
-### Known apps using this library
+## Known apps using this library
 - <a href="https://play.google.com/store/apps/details?id=com.fnp.audioprofiles">Audio Profiles</a>
