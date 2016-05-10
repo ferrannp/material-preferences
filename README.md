@@ -1,7 +1,7 @@
 # material-preferences
 [![Build Status](https://travis-ci.org/ferrannp/material-preferences.svg)](https://travis-ci.org/ferrannp/material-preferences)
 
-Making straightforward to create a preference screen on pre-Lollipop devices looking exactly as if it was a Lollipop one. API 7.
+Making straightforward to create a preference screen on pre-Lollipop devices looking exactly as if it was a Lollipop one. API 11.
 
 ![GIF demo](http://i.giphy.com/13kB32ydxivZ3a.gif)
 
