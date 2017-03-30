@@ -18,7 +18,7 @@ Making straightforward to create a preference screen on pre-Lollipop devices loo
 
 Please check the [sample project](sample) and the required steps below.
 
-###styles
+### styles
 For pre-Lollipop devices you need to use a Theme with No Action Bar, add that in ```values/styles.xml```:
 ```xml
 <style name="SettingsTheme" parent="AppBaseTheme">
