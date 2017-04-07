@@ -10,6 +10,7 @@ android {
         targetSdkVersion Integer.parseInt(ANDROID_BUILD_TARGET_SDK_VERSION)
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -17,9 +18,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:25.3.0'
     compile project(':library')
+
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.1'
+    androidTestCompile 'com.android.support.test:runner:0.4.1'
 }

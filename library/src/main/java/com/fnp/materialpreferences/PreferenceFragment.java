@@ -41,10 +41,10 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
         //If we need to restore the state after a configuration change
         if (savedInstanceState != null) {
             if (getPreferenceScreen() != null) { //Main fragment will fill the HashMap
-                ArrayList<Preference> preferences =  getAllPreferenceScreen(getPreferenceScreen(),
+                ArrayList<Preference> preferences = getAllPreferenceScreen(getPreferenceScreen(),
                         new ArrayList<Preference>());
-                for(Preference preference: preferences){
-                    preferenceScreenHashMap.put(preference.getKey(), (PreferenceScreen)preference);
+                for (Preference preference : preferences) {
+                    preferenceScreenHashMap.put(preference.getKey(), (PreferenceScreen) preference);
                 }
 
             } else { //Nested fragments will use the HashMap to set their PreferenceScreen
@@ -59,13 +59,13 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
     }
 
     private ArrayList<Preference> getAllPreferenceScreen(Preference p, ArrayList<Preference> list) {
-        if( p instanceof PreferenceCategory || p instanceof PreferenceScreen) {
+        if (p instanceof PreferenceCategory || p instanceof PreferenceScreen) {
             PreferenceGroup pGroup = (PreferenceGroup) p;
             int pCount = pGroup.getPreferenceCount();
-            if(p instanceof PreferenceScreen){
+            if (p instanceof PreferenceScreen) {
                 list.add(p);
             }
-            for(int i = 0; i < pCount; i++) {
+            for (int i = 0; i < pCount; i++) {
                 getAllPreferenceScreen(pGroup.getPreference(i), list);
             }
         }
@@ -108,7 +108,7 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
         return v;
     }
 
-    private void preferenceToMaterialPreference(Preference preference){
+    private void preferenceToMaterialPreference(Preference preference) {
         if (preference instanceof PreferenceScreen) {
             preference.setOnPreferenceClickListener(
                     new Preference.OnPreferenceClickListener() {
@@ -189,7 +189,7 @@ public abstract class PreferenceFragment extends android.preference.PreferenceFr
             transaction.commitAllowingStateLoss();
 
             return true;
-        }else if(preference.getIntent() != null) {
+        } else if (preference.getIntent() != null) {
             startActivity(preference.getIntent());
             return true;
         }
